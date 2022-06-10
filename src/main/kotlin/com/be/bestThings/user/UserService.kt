@@ -18,4 +18,17 @@ class UserService(private val userRepository: UserRepository) {
         userRepository.save(newUser)
         return "User successfully created"
     }
+
+    fun removeUser(user: User): String {
+        val existingUser: Optional<User> =
+            userRepository.findUserByUsername(user.username)
+
+        if (existingUser.isEmpty) throw IllegalStateException("User not found")
+
+        val correctPassword = BCrypt.checkpw(user.password, existingUser.get().password)
+        if (!correctPassword) throw IllegalStateException("Incorrect password")
+
+        userRepository.delete(existingUser.get())
+        return "User successfully deleted"
+    }
 }

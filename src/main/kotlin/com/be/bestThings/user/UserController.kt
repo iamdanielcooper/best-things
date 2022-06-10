@@ -11,4 +11,7 @@ class UserController(private val userService: UserService) {
     @ResponseStatus(CREATED)
     fun addUser(@RequestBody newUser: User) = userService.addUser(newUser)
 
+    @DeleteMapping
+    fun removeUser(@RequestBody userDetails: User) = userService.removeUser(userDetails)
+
 }
