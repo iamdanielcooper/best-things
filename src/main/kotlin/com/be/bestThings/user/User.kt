@@ -6,7 +6,7 @@ import javax.persistence.*
 @Table(name = "users")
 open class User(
     open val username: String,
-    open val password: String,
+    open var password: String,
     open val isAdmin: Boolean? = false
 ) {
     @Id

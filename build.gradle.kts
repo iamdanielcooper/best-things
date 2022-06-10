@@ -24,7 +24,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-//	implementation("org.postgresql:postgresql:9.4.1212")
+	implementation("org.mindrot:jbcrypt:0.4")
 }
 
 tasks.withType<KotlinCompile> {

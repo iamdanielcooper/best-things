@@ -1,5 +1,6 @@
 package com.be.bestThings.user
 
+import org.mindrot.jbcrypt.BCrypt
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -10,6 +11,9 @@ class UserService(private val userRepository: UserRepository) {
             userRepository.findUserByUsername(newUser.username)
 
         if (existingUser.isPresent) throw IllegalStateException("Username already taken")
+
+        newUser.password =
+            BCrypt.hashpw(newUser.password, BCrypt.gensalt())
 
         userRepository.save(newUser)
         return "User successfully created"
